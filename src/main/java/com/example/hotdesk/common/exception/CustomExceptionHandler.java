@@ -9,13 +9,14 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestControllerAdvice
 @Slf4j
+@RestControllerAdvice
 public class CustomExceptionHandler
 {
     public CustomErrorResponse buildErrorResponse( String message, HttpStatus status )
@@ -80,5 +81,17 @@ public class CustomExceptionHandler
         return ResponseEntity
             .status( HttpStatus.BAD_REQUEST )
             .body( buildErrorResponse( errors, HttpStatus.BAD_REQUEST ) );
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<CustomErrorResponse> handleNoResourceFoundException(NoResourceFoundException e){
+        log.error(e.getMessage(),e);
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(CustomErrorResponse.builder()
+                        .message("Wrong swagger-url entered")
+                        .timestamp(LocalDateTime.now())
+                        .status(HttpStatus.NOT_FOUND)
+                        .build());
     }
 }

@@ -1,13 +1,13 @@
 server:
-  port: 8087
+  port: 8080
   servlet:
     context-path: /api/v1
 spring:
   datasource:
     port: 8088
-    url: jdbc:postgresql://localhost:${spring.datasource.port}/postgres
+    url: jdbc:postgresql://localhost:5432/hot_desk
     username: postgres
-    password: postgres
+    password: 123
   jpa:
     properties:
       hibernate:
@@ -15,3 +15,6 @@ spring:
         show_sql: true
     hibernate:
       ddl-auto: update
+security:
+  jwt:
+    key: WC+qbHYl2B0o02421L+2UayDp2LtczY/3cSkAyErfTjmcEOXNtyjXq0un/SdY4cw

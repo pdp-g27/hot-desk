@@ -44,7 +44,7 @@ public class RoomService extends GenericCrudService<Room, Integer, RoomCreateDto
         {
             throw new DataIntegrityViolationException(
                 "In office=%s room with number=%s is already exists"
-                    .formatted( office.getId(), entity.getNumber() )
+                    .formatted( office.getId(), entity.getNumber())
             );
         }
 

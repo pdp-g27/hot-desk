@@ -1,7 +1,6 @@
 package com.example.hotdesk.desk.dto;
 
 import com.example.hotdesk.desk.entity.Accessories;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
