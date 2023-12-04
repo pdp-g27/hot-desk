@@ -25,7 +25,19 @@ public class SecurityConfiguration
             "/swagger-resources/**",
             "/webjars/**",
             "/auth/register",
+
             "/user",
+            "/user/**",
+
+            "/office",
+            "/office/**",
+
+            "/room",
+            "/room/**",
+
+            "/desk",
+            "/desk/**",
+
             "/api/***"
     };
     @Bean

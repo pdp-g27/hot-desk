@@ -13,9 +13,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
-//@Configuration
+@Configuration
 public class SwaggerConfig {
-//        @Bean
+        @Bean
         public OpenAPI springOpenAPI() {
             return new OpenAPI()
                     .info(new Info()
@@ -35,7 +35,7 @@ public class SwaggerConfig {
                             .url("https://springshop.wiki.github.org/docs"))
                     .servers(List.of(
                             new Server()
-                                    .url("http://localhost:8080")
+                                    .url("http://localhost:8080/api/v1")
                                     .description("Production")
                     ))
                     .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))

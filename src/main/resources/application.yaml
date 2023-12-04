@@ -4,7 +4,6 @@ server:
     context-path: /api/v1
 spring:
   datasource:
-    port: 8088
     url: jdbc:postgresql://localhost:5432/hot_desk
     username: postgres
     password: 123

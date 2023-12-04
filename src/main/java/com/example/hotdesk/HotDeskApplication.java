@@ -1,6 +1,5 @@
 package com.example.hotdesk;
 
-import com.example.hotdesk.desk.entity.Accessories;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
