@@ -1,12 +1,12 @@
 server:
-  port: 8080
+  port: 8087
   servlet:
     context-path: /api/v1
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/hot_desk
+    url: jdbc:postgresql://localhost:8088/postgres
     username: postgres
-    password: 123
+    password: postgres
   jpa:
     properties:
       hibernate:

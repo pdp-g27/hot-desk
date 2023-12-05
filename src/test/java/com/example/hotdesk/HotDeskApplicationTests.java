@@ -10,6 +10,7 @@ class HotDeskApplicationTests
     @Test
     void contextLoads()
     {
+
     }
 
 }

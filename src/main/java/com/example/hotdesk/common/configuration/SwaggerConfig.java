@@ -13,13 +13,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
-@Configuration
 public class SwaggerConfig {
         @Bean
         public OpenAPI springOpenAPI() {
             return new OpenAPI()
                     .info(new Info()
-                            .title("Spring 6 Swagger 2 Annotation Example")
+                            .title("Hot desk desk project api v1 doc")
                             .description("Spring 6 Swagger Simple Application")
                             .version("${api.version}")
                             .contact(new Contact()
@@ -35,7 +34,7 @@ public class SwaggerConfig {
                             .url("https://springshop.wiki.github.org/docs"))
                     .servers(List.of(
                             new Server()
-                                    .url("http://localhost:8080/api/v1")
+                                    .url("http://localhost:8087/api/v1")
                                     .description("Production")
                     ))
                     .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))

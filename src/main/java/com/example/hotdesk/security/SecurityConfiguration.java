@@ -28,15 +28,8 @@ public class SecurityConfiguration
 
             "/user",
             "/user/**",
-
-            "/office",
-            "/office/**",
-
-            "/room",
-            "/room/**",
-
-            "/desk",
-            "/desk/**",
+            "/sms-code",
+            "/sms-code/**",
 
             "/api/***"
     };

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -83,15 +84,55 @@ public class CustomExceptionHandler
             .body( buildErrorResponse( errors, HttpStatus.BAD_REQUEST ) );
     }
 
-    @ExceptionHandler(NoResourceFoundException.class)
-    public ResponseEntity<CustomErrorResponse> handleNoResourceFoundException(NoResourceFoundException e){
-        log.error(e.getMessage(),e);
+    @ExceptionHandler( NoResourceFoundException.class )
+    public ResponseEntity<CustomErrorResponse> handleNoResourceFoundException( NoResourceFoundException e )
+    {
+        log.error( e.getMessage(), e );
         return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(CustomErrorResponse.builder()
-                        .message("Wrong swagger-url entered")
-                        .timestamp(LocalDateTime.now())
-                        .status(HttpStatus.NOT_FOUND)
-                        .build());
+            .status( HttpStatus.NOT_FOUND )
+            .body( CustomErrorResponse.builder()
+                                      .message( "Wrong swagger-url entered" )
+                                      .timestamp( LocalDateTime.now() )
+                                      .status( HttpStatus.NOT_FOUND )
+                                      .build() );
+    }
+
+    @ExceptionHandler( PhoneNumberNotVerifiedException.class )
+    public ResponseEntity<CustomErrorResponse> handlePhoneNumberNotVerifiedException( PhoneNumberNotVerifiedException e )
+    {
+        log.error( e.getMessage(), e );
+        return ResponseEntity
+            .status( HttpStatus.FORBIDDEN )
+            .body( CustomErrorResponse.builder()
+                                      .message( e.getMessage() )
+                                      .timestamp( LocalDateTime.now() )
+                                      .status( HttpStatus.FORBIDDEN )
+                                      .build() );
+    }
+
+    @ExceptionHandler( BadCredentialsException.class )
+    public ResponseEntity<CustomErrorResponse> handleBadCredentialsException( BadCredentialsException e )
+    {
+        log.error( e.getMessage(), e );
+        return ResponseEntity
+            .status( HttpStatus.UNAUTHORIZED )
+            .body( CustomErrorResponse.builder()
+                                      .message( e.getMessage() )
+                                      .timestamp( LocalDateTime.now() )
+                                      .status( HttpStatus.UNAUTHORIZED )
+                                      .build() );
+    }
+
+    @ExceptionHandler( SmsVerificationException.class )
+    public ResponseEntity<CustomErrorResponse> handleSmsVerificationException( SmsVerificationException e )
+    {
+        log.error( e.getMessage(), e );
+        return ResponseEntity
+            .status( HttpStatus.BAD_REQUEST )
+            .body( CustomErrorResponse.builder()
+                                      .message( e.getMessage() )
+                                      .timestamp( LocalDateTime.now() )
+                                      .status( HttpStatus.BAD_REQUEST )
+                                      .build() );
     }
 }

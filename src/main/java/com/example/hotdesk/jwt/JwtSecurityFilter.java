@@ -22,35 +22,42 @@ import java.io.IOException;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class JwtSecurityFilter extends OncePerRequestFilter {
+public class JwtSecurityFilter extends OncePerRequestFilter
+{
 
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
+
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-       try {
-           String header = request.getHeader(HttpHeaders.AUTHORIZATION);
+    protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain filterChain ) throws ServletException, IOException
+    {
+        try
+        {
+            String header = request.getHeader( HttpHeaders.AUTHORIZATION );
 
-           if (StringUtils.isBlank(header) || !header.startsWith("Bearer")){
-               filterChain.doFilter(request,response);
-               return;
-           }
-           String token = header.substring(7);
-           Claims claims = jwtService.claims(token);
-           String phone = claims.getSubject();
+            if( StringUtils.isBlank( header ) || !header.startsWith( "Bearer" ) )
+            {
+                filterChain.doFilter( request, response );
+                return;
+            }
+            String token = header.substring( 7 );
+            Claims claims = jwtService.claims( token );
+            String phone = claims.getSubject();
 
-           UserDetails userDetails = userDetailsService.loadUserByUsername(phone);
+            UserDetails userDetails = userDetailsService.loadUserByUsername( phone );
 
-           User user = (User) userDetails;
+            User user = (User) userDetails;
 
-           var authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+            var authenticationToken = new UsernamePasswordAuthenticationToken( userDetails, null, userDetails.getAuthorities() );
 
-           SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            SecurityContextHolder.getContext().setAuthentication( authenticationToken );
 
-           filterChain.doFilter(request,response);
-       }catch (Exception e){
-           log.error(e.getMessage(),e);
-           filterChain.doFilter(request,response);
-       }
+            filterChain.doFilter( request, response );
+        }
+        catch( Exception e )
+        {
+            log.error( e.getMessage(), e );
+            filterChain.doFilter( request, response );
+        }
     }
 }
